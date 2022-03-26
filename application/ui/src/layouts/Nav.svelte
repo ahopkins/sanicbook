@@ -64,7 +64,10 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a href="http://" class="button is-link">
+                    <a
+                        href="https://www.amazon.com/dp/1801814414"
+                        class="button is-link"
+                    >
                         <strong>Buy the book</strong>
                         <span class="icon is-small">
                             <i class="fas fa-book" />
