@@ -1,0 +1,7 @@
+aioredis
+cryptography
+databases[postgresql]
+httpx
+sanic==21.12
+sanic-ext==21.12
+sanic-jwt
