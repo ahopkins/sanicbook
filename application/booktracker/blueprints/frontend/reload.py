@@ -69,42 +69,46 @@ def setup_livereload(bp: Blueprint):
     @bp.before_server_start
     async def start(app, _):
         global livereload
-        livereload.config.UI_DIR = app.config.UI_DIR
-        app.ctx.livereload_server = await livereload.create_server(
-            host="0.0.0.0", port=35729, return_asyncio_server=True
-        )
-        app.add_task(runner(livereload, app.ctx.livereload_server))
+
+        if app.config.LOCAL:
+            livereload.config.UI_DIR = app.config.UI_DIR
+            app.ctx.livereload_server = await livereload.create_server(
+                host="0.0.0.0", port=35729, return_asyncio_server=True
+            )
+            app.add_task(runner(livereload, app.ctx.livereload_server))
 
     @bp.before_server_stop
     async def stop(app, _):
-        await app.ctx.livereload_server.close()
+        if app.config.LOCAL:
+            await app.ctx.livereload_server.close()
 
     @bp.before_server_start
     async def check_reloads(app, _):
-        do_rebuild = False
-        if reloaded := app.config.get("RELOADED_FILES"):
-            reloaded = reloaded.split(",")
+        if app.config.LOCAL:
+            do_rebuild = False
+            if reloaded := app.config.get("RELOADED_FILES"):
+                reloaded = reloaded.split(",")
 
-            do_rebuild = any(
-                ext in ("svelte", "js", "css", "html")
-                for filename in reloaded
-                if (ext := filename.rsplit(".", 1)[-1])
-            )
+                do_rebuild = any(
+                    ext in ("svelte", "js", "css", "html")
+                    for filename in reloaded
+                    if (ext := filename.rsplit(".", 1)[-1])
+                )
 
-        if do_rebuild:
-            logger.warning(f"RUNNING 'yarn build' in {app.config.UI_DIR}")
-            rebuild = await create_subprocess_shell(
-                "yarn build",
-                stdout=PIPE,
-                stderr=PIPE,
-                cwd=app.config.UI_DIR,
-            )
+            if do_rebuild:
+                logger.warning(f"RUNNING 'yarn build' in {app.config.UI_DIR}")
+                rebuild = await create_subprocess_shell(
+                    "yarn build",
+                    stdout=PIPE,
+                    stderr=PIPE,
+                    cwd=app.config.UI_DIR,
+                )
 
-            while True:
-                message = await rebuild.stdout.readline()
-                if not message:
-                    break
-                output = message.decode("ascii").rstrip()
-                logger.info(f"[reload] {output}")
+                while True:
+                    message = await rebuild.stdout.readline()
+                    if not message:
+                        break
+                    output = message.decode("ascii").rstrip()
+                    logger.info(f"[reload] {output}")
 
-            await livereload.dispatch("watchdog.file.reload")
+                await livereload.dispatch("watchdog.file.reload")
