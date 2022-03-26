@@ -1,0 +1,1 @@
+web: sanic --port=7777 --host=0.0.0.0 --workers=1 --factory --access-log booktracker.server:create_app

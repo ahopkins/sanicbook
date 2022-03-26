@@ -17,7 +17,7 @@ DEFAULT: Tuple[str, ...] = (
     "booktracker.blueprints.view",
     "booktracker.middleware.request_context",
     "booktracker.worker.postgres",
-    "booktracker.worker.redis",
+    # "booktracker.worker.redis",
 )
 
 
