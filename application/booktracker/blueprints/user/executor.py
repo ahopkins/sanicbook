@@ -31,3 +31,18 @@ class UserExecutor(BaseExecutor):
         eid: str = "",
     ) -> User:
         ...
+
+    async def set_refresh_token(
+        self,
+        *,
+        eid: str,
+        refresh_token: str,
+    ) -> User:
+        ...
+
+    async def get_refresh_token(
+        self,
+        *,
+        eid: str,
+    ) -> str:
+        ...

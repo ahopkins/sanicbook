@@ -44,3 +44,8 @@ INSERT INTO authors (ref_id, name)
 VALUES (1, 'Adam Hopkins');
 INSERT INTO books (ref_id, title, author_id)
 VALUES (2, 'Python Web Development with Sanic', 1);
+--
+ALTER TABLE users
+ADD COLUMN refresh_token CHARACTER VARYING(255);
+alter table users
+    rename column refresh_key to refresh_token;
