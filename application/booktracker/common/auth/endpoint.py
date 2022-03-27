@@ -26,7 +26,9 @@ class GitHubOAuthLogin(BaseEndpoint):
             response = redirect(url)
             set_cookie(
                 response=response,
-                domain="localhost",
+                domain="localhost"
+                if request.app.config.LOCAL
+                else "sanicbook.herokuapp.com",
                 key="ref_token",
                 value=ref,
                 httponly=True,
@@ -35,7 +37,9 @@ class GitHubOAuthLogin(BaseEndpoint):
             )
             set_cookie(
                 response=response,
-                domain="localhost",
+                domain="localhost"
+                if request.app.config.LOCAL
+                else "sanicbook.herokuapp.com",
                 key="csrf_token",
                 value=token,
                 samesite="strict",
