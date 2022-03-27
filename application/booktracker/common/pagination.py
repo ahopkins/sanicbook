@@ -1,7 +1,15 @@
 from dataclasses import dataclass, field
 
+from sanic_ext import openapi
+
 from booktracker.common.base_model import BaseModel
 from sanic import Request, Sanic
+
+
+@openapi.component(name="Pagination")
+class P:
+    limit: int
+    offset: int
 
 
 @dataclass

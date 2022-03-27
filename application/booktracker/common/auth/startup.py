@@ -1,4 +1,5 @@
 from sanic import Sanic
+from sanic_ext import openapi
 from sanic_jwt import Initialize
 
 from .endpoint import GitHubOAuthLogin
@@ -31,3 +32,7 @@ def setup_auth(app: Sanic):
         expiration_delta=60 * 15,
         leeway=0,
     )
+
+    if bp := app.blueprints.get("auth_bp"):
+        bp.name = "Authentication"
+        openapi.exclude(bp=bp)

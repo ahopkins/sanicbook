@@ -49,3 +49,7 @@ class CreateBookBody(BaseModel):
 
 class CreateSeriesBody(BaseModel):
     name: str
+
+
+class UpdateBookStateBody(BaseModel):
+    state: BookState

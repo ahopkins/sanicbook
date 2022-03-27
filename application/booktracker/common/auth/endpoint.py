@@ -13,6 +13,7 @@ class GitHubOAuthLogin(BaseEndpoint):
             f"&client_id={request.app.config.GITHUB_OAUTH_CLIENT_ID}"
         )
 
+        response = redirect(url)
         if (
             "csrf_token" not in request.cookies
             or "ref_token" not in request.cookies
@@ -23,7 +24,6 @@ class GitHubOAuthLogin(BaseEndpoint):
                 request.app.config.CSRF_REF_PADDING,
             )
 
-            response = redirect(url)
             set_cookie(
                 response=response,
                 domain="localhost"
@@ -45,7 +45,5 @@ class GitHubOAuthLogin(BaseEndpoint):
                 samesite="strict",
                 secure=(not request.app.config.LOCAL),
             )
-        else:
-            response = redirect("/")
 
         return response

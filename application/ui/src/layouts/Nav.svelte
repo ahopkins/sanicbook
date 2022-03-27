@@ -28,8 +28,9 @@
                 href="https://github.com/PacktPublishing/Web-Development-with-Sanic"
                 class="navbar-item"
             >
-                Source Code
+                Book Source Code
             </a>
+            <a href="/docs" class="navbar-item"> Example API Docs </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a href="http://" class="navbar-link"> More </a>
@@ -46,11 +47,15 @@
                     </a>
                     <hr class="navbar-divider" />
                     <a href="https://twitter.com/AdmHpkns" class="navbar-item">
-                        Twitter: @admhpkns
+                        Twitter: <strong>@admhpkns</strong>
                     </a>
                     <a href="https://github.com/ahopkins" class="navbar-item">
-                        Github: /ahopkins
+                        Github: <strong>/ahopkins</strong>
                     </a>
+                    <a href="https://discord.gg/FARQzAEMAA" class="navbar-item">
+                        Discord: <strong>Sanic</strong>
+                    </a>
+                    <hr class="navbar-divider" />
                     <a
                         href="https://github.com/ahopkins/sanicbook"
                         class="navbar-item"
