@@ -6,7 +6,7 @@
     import { createBook } from "../utils/actions";
     import { derived, writable } from "svelte/store";
 
-    let isActive = true;
+    let isActive = false;
 
     const text = {
         shouldCreateBook: "Book doesn't exist? Click to create a new one.",

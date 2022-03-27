@@ -41,5 +41,7 @@ class GitHubOAuthLogin(BaseEndpoint):
                 samesite="strict",
                 secure=(not request.app.config.LOCAL),
             )
+        else:
+            response = redirect("/")
 
         return response
