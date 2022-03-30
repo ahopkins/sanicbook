@@ -28,7 +28,7 @@ class GitHubOAuthLogin(BaseEndpoint):
                 response=response,
                 domain="localhost"
                 if request.app.config.LOCAL
-                else "sanicbook.herokuapp.com",
+                else "sanicbook.com",
                 key="ref_token",
                 value=ref,
                 httponly=True,
@@ -39,7 +39,7 @@ class GitHubOAuthLogin(BaseEndpoint):
                 response=response,
                 domain="localhost"
                 if request.app.config.LOCAL
-                else "sanicbook.herokuapp.com",
+                else "sanicbook.com",
                 key="csrf_token",
                 value=token,
                 samesite="strict",

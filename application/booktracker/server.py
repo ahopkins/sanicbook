@@ -38,7 +38,7 @@ def create_app(module_names: Optional[Sequence[str]] = None) -> Sanic:
     app.config.CORS_ORIGINS = (
         "http://localhost:7777"
         if app.config.LOCAL
-        else "https://sanicbook.herokuapp.com"
+        else "https://sanicbook.com"
     )
     app.config.CSRF_REF_PADDING = 12
     app.config.CSRF_REF_LENGTH = 18
