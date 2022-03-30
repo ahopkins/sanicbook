@@ -16,6 +16,7 @@ from booktracker.worker.request import BooktrackerRequest
 DEFAULT: Tuple[str, ...] = (
     "booktracker.blueprints.view",
     "booktracker.middleware.request_context",
+    "booktracker.middleware.redirect",
     "booktracker.worker.postgres",
     "booktracker.worker.redis",
 )
