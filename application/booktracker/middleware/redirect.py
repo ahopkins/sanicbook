@@ -6,9 +6,8 @@ app = Sanic.get_app("BooktrackerApp")
 
 @app.on_request
 async def https_redirect(request: Request):
-    print(request.forwarded)
     if (
-        request.forwarded.get("x-forwarded-proto") == "http"
+        request.headers.get("x-forwarded-proto") == "http"
         and not app.config.LOCAL
     ):
         redirect(request.url.replace("http://", "https://"))
