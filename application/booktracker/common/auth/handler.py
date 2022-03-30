@@ -2,9 +2,12 @@ from logging import getLogger
 from typing import Any, Dict
 
 import httpx
+from aioredis import Redis
 from booktracker.blueprints.user.executor import UserExecutor
 from sanic import Request
 from sanic.exceptions import NotFound, Unauthorized
+
+from .model import RefreshTokenKey
 
 logger = getLogger("booktracker")
 
@@ -92,10 +95,12 @@ async def payload_extender(payload, user):
 async def store_refresh_token(user_id, refresh_token, request):
     """The actual keyword argument being passed is `user_id`, but the
     value that it is retrieving is the eid"""
-    executor = UserExecutor(request.app.ctx.postgres)
-    await executor.set_refresh_token(eid=user_id, refresh_token=refresh_token)
+    key = RefreshTokenKey(user_id)
+    redis: Redis = request.app.ctx.redis
+    await redis.set(str(key), refresh_token)
 
 
 async def retrieve_refresh_token(request, user_id):
-    executor = UserExecutor(request.app.ctx.postgres)
-    return await executor.get_refresh_token(eid=user_id)
+    key = RefreshTokenKey(user_id)
+    redis: Redis = request.app.ctx.redis
+    return await redis.get(str(key))

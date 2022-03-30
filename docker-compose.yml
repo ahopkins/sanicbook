@@ -7,7 +7,7 @@ services:
       - 35729:35729
     depends_on:
       - db-postgres
-      # - db-redis
+      - db-redis
     command:
       sanic
       --port=7777
@@ -31,7 +31,7 @@ services:
       SANIC_REDIS_MAX: 12
       SANIC_KEEP_ALIVE_TIMEOUT: 1
       SANIC_HTTP_AUTO_TRACE: "True"
-      SANIC_GITHUB_OAUTH_CLIENT_ID: "ba4b3cad05f708b7f5c9"
+      SANIC_GITHUB_OAUTH_CLIENT_ID: "df4c87fe3db4862c7e7f"
       SANIC_GITHUB_OAUTH_SECRET: ${GITHUB_OAUTH_SECRET}
       SANIC_CSRF_SECRET: ${CSRF_SECRET}
   db-postgres:
@@ -42,7 +42,7 @@ services:
       - POSTGRES_PASSWORD=foobar
     volumes:
       - ./postgres/initial.sql:/docker-entrypoint-initdb.d/initial.sql
-  # db-redis:
-  #   image: redis:alpine
-  #   ports:
-  #     - 6379:6379
+  db-redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
