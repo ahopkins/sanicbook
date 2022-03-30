@@ -10,4 +10,4 @@ async def https_redirect(request: Request):
         request.headers.get("x-forwarded-proto") == "http"
         and not app.config.LOCAL
     ):
-        redirect(request.url.replace("http://", "https://"))
+        return redirect(request.url.replace("http://", "https://"))
