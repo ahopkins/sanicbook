@@ -1,0 +1,2 @@
+pytest
+sanic-testing
