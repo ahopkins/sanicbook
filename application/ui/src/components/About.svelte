@@ -45,7 +45,7 @@
             <div class="column is-two-thirds-tablet is-half-desktop">
                 <h3 class="is-size-3">About this website</h3>
                 <p>
-                    This website is the web applicaiton from <a
+                    This website is the web application from <a
                         href="https://github.com/PacktPublishing/Python-Web-Development-with-Sanic/tree/main/Chapter11"
                         >Chapter 11, <em>A Complete Real-World Example</em> of the
                         book.</a
